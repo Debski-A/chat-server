@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.exmaple</groupId>
+    <artifactId>chat-server</artifactId>
+    <version>1.0.0</version>
+
+    <!-- war (Web Application aRchive) - packaging dla webówek. W skrócie: pakuje aplikacje
+   podobnie do win zipa zachowując przy tym odpowiednią strukture katalogów aby kontener serwletów ( np. Tomcat )
+   mógł taką zapakowaną aplikację odczytać -->
+    <packaging>war</packaging>
+
+    <name>chat server Maven Webapp</name>
+
+    <properties>
+        <!-- system kodowania plików źródłowych
+        czyli plików .java Przydaje się gdy w kodzie masz na sztywno zakodowany String z np. polskimi znakami -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- w skrócie: do jakiej wersji javy będzie dostosowana aplikacja. Z reguły jest kompatybliność wsteczna,
+        tzn. aplikacja napisana pod Jave 7, bedzie działać na Javie 8.  1.8 to Java 8   Po Javie 8 zrezygnowano z
+        przedrostka i stosuje się już tylko nazewnictwo Java 9, Java 10 itd.
+         -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <!-- biblioteka wspomagajaca testy -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- hessian i burlap -->
+        <dependency>
+            <groupId>com.caucho</groupId>
+            <artifactId>hessian</artifactId>
+            <version>4.0.38</version>
+        </dependency>
+        <!-- API do serwletów, <scope>provided</scope> oznacza, że będzie to dostarczone z zewnatrz np. przez kontener
+        serwletów (Tomcat) w trakcie działania aplikacji, a zależność ta jest potrzebna tylko do zbudowania i
+        testowania aplikacji
+         -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.4</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>chat-server</finalName>
+        <pluginManagement>
+            <!-- ponizsze pluginy sa tylko po to, aby ustawic na sztywno wersje, bo inaczej maven zaciagnie wersje
+            defaultowo ( czyli jesli nie masz najswiezszego mavena to moga być to wersje starsze od tych ponizesj -->
+            <plugins>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.0.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.0</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.22.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.2.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>2.5.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.8.2</version>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

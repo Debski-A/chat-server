@@ -2,8 +2,6 @@ package com.main;
 
 import org.junit.Test;
 
-import java.util.Iterator;
-
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -17,7 +15,7 @@ public class ChatServerTest {
         //when
         chatServer.subscribe("Marek");
         chatServer.subscribe("Jarek");
-        ChatData data = chatServer.refresh();
+        ChatDataSingleton data = chatServer.refresh();
         //then
         assertThat(data.getUsers().size(), is(2));
     }
@@ -27,7 +25,7 @@ public class ChatServerTest {
         //when
         chatServer.subscribe("Marek");
         boolean result = chatServer.subscribe("Marek");
-        ChatData data = chatServer.refresh();
+        ChatDataSingleton data = chatServer.refresh();
         //then
         assertFalse(result);
         assertThat(data.getUsers().size(), is(1));

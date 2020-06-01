@@ -1,27 +1,43 @@
 <!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <!-- plik web.xml to tzw. deployment descriptor. Zaczytuje i podpina go sobie np. Tomcat
  Dlatego miedzy innymi w czystych aplikacjach webowych nie ma metody main-->
 <web-app>
-  <servlet>
-   <servlet-name>chat</servlet-name>
-   <servlet-class>com.caucho.hessian.server.HessianServlet</servlet-class>
-    <init-param>
-      <param-name>home-class</param-name>
-      <param-value>com.main.ChatServer</param-value>
-    </init-param>
-    <init-param>
-      <param-name>home-api</param-name>
-      <param-value>com.main.ChatServerApi</param-value>
-    </init-param>
-  </servlet>
+    <servlet>
+        <servlet-name>chat</servlet-name>
+        <servlet-class>com.caucho.hessian.server.HessianServlet</servlet-class>
+        <init-param>
+            <param-name>home-class</param-name>
+            <param-value>com.main.ChatServer</param-value>
+        </init-param>
+        <init-param>
+            <param-name>home-api</param-name>
+            <param-value>com.main.ChatServerApi</param-value>
+        </init-param>
+    </servlet>
 
-  <servlet-mapping>
-      <!-- mapuje konfiguracje powyzej do sciezki /chat -->
-      <servlet-name>chat</servlet-name>
-      <url-pattern>/chat</url-pattern>
-  </servlet-mapping>
-  
+    <servlet> <!-- servlet dla XML RPC -->
+        <servlet-name>chat-xml-rpc</servlet-name>
+        <servlet-class>org.apache.xmlrpc.webserver.XmlRpcServlet</servlet-class>
+        <init-param>
+            <param-name>enabledForExtensions</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </servlet>
+
+
+    <servlet-mapping>
+        <!-- mapuje konfiguracje powyzej do sciezki /chat-xml-rpc -->
+        <servlet-name>chat-xml-rpc</servlet-name>
+        <url-pattern>/chat-xml-rpc</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <!-- mapuje konfiguracje powyzej do sciezki /chat -->
+        <servlet-name>chat</servlet-name>
+        <url-pattern>/chat</url-pattern>
+    </servlet-mapping>
+
 </web-app>

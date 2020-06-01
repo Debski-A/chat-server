@@ -1,14 +1,18 @@
-package com.main;
+package com.main.xml.rpc;
 
-import com.caucho.hessian.server.HessianServlet;
+
+import com.main.ChatDataSingleton;
+import com.main.ChatServerApi;
+import com.main.Message;
 
 import java.time.LocalTime;
 
-public class ChatServer extends HessianServlet implements ChatServerApi {
+public class ChatServerXmlRpc implements ChatServerApi {
 
+    // Powielona implementacja dla XML RPC. Jedyna roznica to brak rozszerzenia klasy HessianServlet
     private ChatDataSingleton chatDataSingleton; // zawiera informacje potrzebne dla chat-client
 
-    public ChatServer() {
+    public ChatServerXmlRpc() {
         chatDataSingleton = ChatDataSingleton.ChatData();
     }
 
